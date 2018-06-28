@@ -1,0 +1,37 @@
+{{!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Matcha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/bootstrap.css" />
+	<link rel="stylesheet" href="/assets/style.css" />
+    <script src="main.js"></script>
+</head> --}}
+
+<body>
+    {{!-- <div class="header">
+        <h1>Matcha<sup>TM</sup></h1>
+        <p>find love</p>
+    </div> --}}
+    <!-- <div class="navbar"><a href="#">Profile</a><a class="right" href="#">Log in</a></div> -->
+    <div class="row">
+        <div class="side height-100" id="omniauth">
+            <img id="ItemPreview" src="" alt="profile pic">
+            <script>
+                $('#ItemPreview').attr('src', 'data:image/png;base64, 6a013f0fac19b4a195e33764a7f95ec3');
+            </script>
+            <p>{{gender}}a</p>
+
+            {{!-- foreach($users as $userlist) img src="" a href="{{ action('ProfileController@show', [$userlist->id]) }}" h2 {{ $userlist->name }} /h2 /a 
+            endforeach() --}}
+        </div>
+        <div class="main">
+            <img src="/images/10.jpg" alt="Two Lovebirds" class="index-image">
+        </div>
+    </div>
+</body>
+
+</html>
