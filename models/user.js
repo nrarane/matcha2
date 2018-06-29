@@ -19,7 +19,6 @@ var UserSchema = mongoose.Schema({
     lastname: {
         type: String
     },
-    // weird types
     dob: {
         type: Date,
         default: Date.now

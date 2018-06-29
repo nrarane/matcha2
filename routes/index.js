@@ -3,7 +3,16 @@ var router = express.Router();
 
 // Get Homepage
 router.get('/', checkAuthentication, function(req, res){
-	res.render('index');
+	//
+	
+	var gender = {gender: gender};
+
+// res.send(result, {
+//     gender: gender});
+
+	res.render('index', {
+		gender: gender});
+
 });
 
 function checkAuthentication(req, res, next){

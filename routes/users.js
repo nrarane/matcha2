@@ -1,5 +1,27 @@
 var express = require('express');
 var router = express.Router();
+require('express-ws')(router);
+
+// chatting
+var nextId = 1;
+var clients = {};
+router.ws('/chat', function(ws, req) {
+	var clientId = nextId;
+	clients[clientId] = {ws: ws};
+	nextId++;
+	ws.on('message', function(msgString) {
+		var inMsg = JSON.parse(msgString);
+		var outMsg = JSON.stringify({
+			clientId: clientId,
+			message: inMsg.message
+		});
+		Object.keys(clients).forEach(function(clientId) {
+			clients[clientId].ws.send(outMsg);
+		});
+	});
+});
+//
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 //for image upload
@@ -121,7 +143,7 @@ router.post('/update', upload.any(), function(req, res) {
     }
 	else {
 	    var updateUser = new User({
-            propic: propic,
+            propic: Buffer('340b0da2246d953f085d75f17c585671'),
             //firstname: firstname,
             //lastname: lastname,
 	        //email: email,
@@ -144,7 +166,7 @@ router.post('/update', upload.any(), function(req, res) {
 		res.redirect('/');
 	}	
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 
 passport.use(new LocalStrategy(function (username, password, done) {
     User.getUserByUsername(username, function (err, user) {
@@ -191,7 +213,7 @@ router.get('/logout', function (req, res) {
 });
 
 router.get('/chat', function(req, res) {
-	res.render('chat');
-})
+ 	res.render('chat');
+});
 
 module.exports = router;

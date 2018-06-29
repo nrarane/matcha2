@@ -20,14 +20,28 @@ mongoose.connect('mongodb://matcha:matcha@ds159129.mlab.com:59129/matchaproject'
 var db = mongoose.connection;
 const path = require('path');
 
+var expressWs = require('express-ws')(express());
+var app = expressWs.app;
+// var users = require('./routes/users');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 //ends here
 
 
-var app = express();
+//var app = express();
+
+// var expressWs = require('express-ws')(express());
+// var app = expressWs.app;
+// var users = require('./routes/users');
 // const upload = require("./uploadFile");
+// var expressWs = require('express-ws')(app);
+
+// app.ws('/chat', function(req, res) {
+//     ws.on('message', function(msg) {
+//         ws.send(msg + " from the server");
+//     });
+// });
 
 
 //mongoose.connect('mongodb://matcha:matcha@ds159129.mlab.com:59129/matchaproject');
@@ -108,5 +122,5 @@ app.use('/users', users);
 app.set('port', (process.env.PORT || 8000));
 
 app.listen(app.get('port'), function(){
-	console.log('Server started on port '+app.get('port'));
+	console.log('Server started on port ' + app.get('port'));
 });
