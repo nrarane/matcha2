@@ -2,12 +2,22 @@ var express = require('express');
 var router = express.Router();
 require('express-ws')(router);
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+//for image upload
+var multer = require('multer');
+var upload = multer({dest: 'public/images/'});
+
+var User = require('../models/user');
+
 // chatting
+var chat = require('../models/chat');
+
 var nextId = 1;
 var clients = {};
 router.ws('/chat', function(ws, req) {
 	var clientId = nextId;
-	clients[clientId] = {ws: ws};
+	clients[clientId] = { ws: ws };
 	nextId++;
 	ws.on('message', function(msgString) {
 		var inMsg = JSON.parse(msgString);
@@ -16,19 +26,34 @@ router.ws('/chat', function(ws, req) {
 			message: inMsg.message
 		});
 		Object.keys(clients).forEach(function(clientId) {
-			clients[clientId].ws.send(outMsg);
+			clients[clientId].ws.send(outMsg, function(error) {
+				if (error !== undefined) {
+					console.warn('error: ', error);
+				}
+			});
 		});
+	});
+	ws.on('close', function() {
+		delete clients[clientId];
+	});
+});
+
+router.post('/chat', function(req, res) {
+	var sender = req.body.sender;
+	var reciever = req.body.reciever;
+	var message = req.body.message;
+
+	var newChat = new Chat({
+		sender: sender,
+		reciever: reciever,
+		message: message
+	});
+	User.createChat(newChat, function (err, chat) {
+		if (err) throw err;
+		console.log(chat);
 	});
 });
 //
-
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-//for image upload
-var multer = require('multer');
-var upload = multer({dest: 'public/images/'});
-
-var User = require('../models/user');
 
 // Register
 router.get('/register', function (req, res) {
