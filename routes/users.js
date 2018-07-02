@@ -11,7 +11,7 @@ var upload = multer({dest: 'public/images/'});
 var User = require('../models/user');
 
 // chatting
-var chat = require('../models/chat');
+var Chat = require('../models/chat');
 
 var nextId = 1;
 var clients = {};
@@ -39,19 +39,21 @@ router.ws('/chat', function(ws, req) {
 });
 
 router.post('/chat', function(req, res) {
-	var sender = req.body.sender;
-	var reciever = req.body.reciever;
+	//var sender = req.body.sender;
+	//var reciever = req.query.reciever;
 	var message = req.body.message;
 
 	var newChat = new Chat({
-		sender: sender,
-		reciever: reciever,
+		//sender: sender,
+		//reciever: reciever,
 		message: message
 	});
-	User.createChat(newChat, function (err, chat) {
+	Chat.createChat(newChat, function (err, chat) {
 		if (err) throw err;
 		console.log(chat);
 	});
+	//req.flash('success_msg', 'Message sent successfully');
+	//res.redirect('/users/chat');
 });
 //
 

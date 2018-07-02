@@ -21,7 +21,6 @@ var ChatSchema = mongoose.Schema({
 var Chat = module.exports = mongoose.model('Chat', ChatSchema);
 
 module.exports.createChat = function(newChat, callback){
-
     newChat.save(callback);
 }
 

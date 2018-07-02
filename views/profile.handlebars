@@ -63,7 +63,7 @@
         <input type="password" class="form-control" placeholder="Password" name="password2">
     </div> --}}
     <div class="form-group">
-        <label>Gender</label><p>{{firstname}} + "hope this works"</p>
+        <label>Gender</label><p>"hope this works"</p>
         <input type="radio" class="form-control" name="gender" value="Woman"> Woman
         <input type="radio" class="form-control" name="gender" value="Man"> Man
     </div>
@@ -85,9 +85,9 @@
     </div> --}}
     <p>
         <label for="distance">Distance range:</label>
-        <input type="text" id="distance" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        <input type="text" name="distance" id="distance" readonly style="border:0; color:#f6931f; font-weight:bold;">
     </p>
-    <div id="distanceR"></div><br/>
+    {{!-- <div id="distanceR"></div><br/> --}}
     {{!-- <div class="form-group">
         <label>Max distance</label>
         <input type="range" min="1" max="100" value="50" class="slider" id="distance" name="maxdistance">
@@ -104,7 +104,7 @@
     </div>
     <div class="form-group">
         <label>About you</label>
-        <textarea class="row" name="about you" cols="30" rows="10" placeholder="Tell us about you"></textarea>
+        <textarea class="row" name="about" cols="30" rows="10" placeholder="Tell us about you"></textarea>
     </div>
     <button type="submit" class="btn btn-default">Submit</button><br/><br/><br/><br/><br/><br/>
 </form>

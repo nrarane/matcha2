@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <title>MongoChat</title>
     <style>
-        #messages{height:300px;}
+        #message{height:300px;}
     </style>
     <script>
         var ws = new WebSocket("ws://localhost:8000/users/chat");
@@ -28,7 +28,7 @@
             var chatBox = document.getElementById('chat');
             var msgInput = chatBox.querySelector('.msgInput');
             var sendButton = chatBox.querySelector('.send');
-            var messages = document.getElementById('messages');
+            var messages = document.getElementById('message');
             
             ws.onmessage  = function(event) {
                 var node = document.createElement('p');
@@ -71,13 +71,15 @@
                 </div>
             </div>
         </div> --}}
-        <div id="chat">
-            <label>Enter a message: 
-                <input type="text" class="msgInput">
-                <button class="send">Send</button>
-            </label>
-        </div>
-        <div id="messages"></div>
+        <form action="/users/chat" method="POST">
+            <div id="chat">
+                <label>Enter a message: </label>
+                <input type="text" class="msgInput" id="chat">
+                <button class="send" type="submit">Send</button>
+            </div>
+            <div id="message"></div>
+        </form>
+        
     </div>
 
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> --}}
